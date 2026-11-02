@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nothing TV UI Flow Checks</title>
+  <link rel="stylesheet" href="../style.css"><style>#test-results{position:fixed;z-index:100;right:14px;top:14px;width:min(520px,36vw);max-height:92vh;overflow:auto;padding:16px;border:1px solid #8490a0;border-radius:10px;background:#080a0fee;color:#f5f6f8;font:14px/1.5 monospace;white-space:pre-wrap;pointer-events:none}</style>
+</head>
+<body>
+  <main id="dashboard">
+    <header class="topbar">
+      <div class="top-controls">
+        <div class="season-label">FORMULA 1 <span>·</span> 2026 SEASON</div>
+        <button class="header-search focusable" data-action="open-search" aria-label="Search apps"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+      </div>
+      <div class="top-identity">
+        <div class="clock-wrap" aria-label="Current time"><span id="clock-time">06:54</span><span id="ampm">PM</span><div id="date">---</div></div>
+        <div class="weather-widget" aria-label="Greater Noida weather and air quality">
+          <div class="weather-readout"><svg class="weather-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 23.5h14.2a6.1 6.1 0 0 0 .3-12.2A8.1 8.1 0 0 0 8.1 14 4.8 4.8 0 0 0 9 23.5Z"/><path d="M11 27h.1m5.4 0h.1m5.4 0h.1"/></svg><span class="weather-temp" id="weather-temp">--°C</span></div>
+          <span class="weather-aqi" id="weather-aqi" aria-live="polite">AQI --</span>
+          <small id="weather-location">GREATER NOIDA</small>
+        </div>
+      </div>
+    </header>
+    <section class="screen home-screen active" data-screen="home">
+      <div class="home-layout">
+        <div class="f1-main">
+          <section class="calendar-panel f1-panel" aria-label="Next Formula One race weekend schedule">
+            <header class="f1-panel-heading"><span id="next-race-title">NEXT RACE WEEKEND</span><span class="f1-season-mark" id="next-race-round">F1</span></header>
+            <div class="calendar-subhead"><span>CODE</span><span>DATE</span><span>SESSION</span><span>IST</span></div>
+            <div class="calendar-list" id="calendar-list"></div>
+          </section>
+          <section class="driver-panel f1-panel" aria-label="Complete 2026 Formula One drivers championship standings">
+            <header class="f1-panel-heading"><span>DRIVERS' CHAMPIONSHIP</span><span class="standings-update" id="standings-update">LIVE DATA</span></header>
+            <div class="driver-table-head"><span>POS</span><span>DRIVER</span><span>TEAM</span><span>PTS</span></div>
+            <div class="driver-columns"><div class="driver-list" id="driver-standing-list-a"></div><div class="driver-list" id="driver-standing-list-b"></div></div>
+          </section>
+          <section class="constructor-panel f1-panel" aria-label="Complete 2026 Formula One constructors championship standings">
+            <header class="f1-panel-heading"><span>CONSTRUCTORS</span><span class="standings-update">PTS</span></header>
+            <div class="constructor-list" id="constructor-standings"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section class="screen apps-screen" data-screen="apps" hidden>
+      <div class="screen-heading"><h1>Apps</h1><div class="heading-actions"><button class="focusable text-action" data-action="open-add-app">ADD APP</button></div></div>
+      <div class="apps-grid" id="all-apps-grid"></div>
+      <div class="apps-pager"><button class="focusable pager-arrow" data-action="apps-prev" aria-label="Previous apps page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button class="focusable pager-arrow" data-action="apps-next" aria-label="Next apps page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      <div id="apps-empty" class="apps-empty" hidden><span>NO APPS FOUND</span><button class="focusable text-action" data-action="refresh">REFRESH</button></div>
+    </section>
+    <section class="screen inputs-screen" data-screen="inputs" hidden>
+      <div class="screen-heading"><div><h1>Inputs</h1><p class="screen-description">Choose a source to switch the TV input.</p></div><button class="focusable text-action" data-action="refresh-inputs">REFRESH SOURCES</button></div>
+      <div class="input-cards" id="input-cards"></div>
+    </section>
+    <section class="screen settings-screen" data-screen="settings" hidden>
+      <div class="screen-heading"><div><h1>Settings</h1><p class="screen-description">Make the launcher work your way.</p></div></div>
+      <div class="settings-layout">
+        <nav class="settings-sidebar" aria-label="Settings categories">
+          <button class="settings-category focusable active" data-action="setting-category" data-value="appearance" aria-current="page"><strong>Appearance</strong><small>Color, text and focus</small></button>
+          <button class="settings-category focusable" data-action="setting-category" data-value="apps" aria-current="false"><strong>Apps</strong><small>Grid and app list</small></button>
+          <button class="settings-category focusable" data-action="setting-category" data-value="data" aria-current="false"><strong>F1 &amp; Weather</strong><small>Units, clock and updates</small></button>
+          <button class="settings-category focusable" data-action="setting-category" data-value="tv" aria-current="false"><strong>TV &amp; Inputs</strong><small>Sources and controls</small></button>
+          <button class="settings-category focusable" data-action="setting-category" data-value="about" aria-current="false"><strong>About</strong><small>Launcher information</small></button>
+        </nav>
+        <section class="settings-detail" id="settings-detail" aria-live="polite"></section>
+      </div>
+    </section>
+    <nav class="bottom-nav" aria-label="Launcher sections">
+      <button class="nav-tab focusable active" data-view="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5H14v-6h-4v6H3.5z"/></svg><span>HOME</span></button>
+      <button class="nav-tab focusable" data-view="apps" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>APPS</span></button>
+      <button class="nav-tab focusable" data-view="inputs" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg><span>INPUTS</span></button>
+      <button class="nav-tab focusable" data-view="settings" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1 1.3 1-1.5 2.6-1.6-.6a8 8 0 0 1-1.5.9L16 20.7h-3l-.3-1.7a8 8 0 0 1-1.6-.6l-1.4.9-2.1-2.1.9-1.5a8 8 0 0 1-.6-1.6L6.2 14v-3l1.7-.3a8 8 0 0 1 .6-1.6l-.9-1.4 2.1-2.1 1.5.9a8 8 0 0 1 1.6-.6L13 4.2h3l.3 1.7a8 8 0 0 1 1.6.6l1.4-.9 2.1 2.1-.9 1.5a8 8 0 0 1 .6 1.6l1.7.3v3z" transform="translate(-1.5 0)"/></svg><span>SETTINGS</span></button>
+    </nav>
+    <div id="status" class="sr-only" aria-live="polite">READY</div>
+  </main>
+  <div id="overlay" hidden></div>
+  <div id="toast" role="status" aria-live="polite" hidden></div><pre id="test-results">Running current UI checks…</pre>
+  <script src="../webOSTVjs-1.2.13/webOSTV.js"></script>
+  <script src="../webOSTVjs-1.2.13/webOSTV-dev.js"></script>
+  <script>
+localStorage.clear();window.TV_APP_CATALOG=[];
+['Apple TV','Crunchyroll','FanCode','Hotstar','JioCinema','Netflix','Prime Video','SonyLIV','Stremio','Twitch','YouTube','ZEE5','CNA','YuppTV','UFC','FIFA+','Tata Play','Xstream','Homebrew','Plex'].forEach(function(title,i){window.TV_APP_CATALOG.push({id:'test.app.'+i,title:title,appType:i===12?'stub':'web',icon:'',custom:false})});
+window.__calls=[];window.webOS={service:{request:function(uri,o){var params=o.parameters||{};window.__calls.push({uri:uri,method:o.method,params:params});setTimeout(function(){var result={returnValue:true};if(o.method==='getExternalInputList')result.devices=[{id:'HDMI_1',label:'HDMI 1',appId:'com.webos.app.hdmi1',connected:true}];if(o.method==='switchInput')result={returnValue:true};if(o.onSuccess)o.onSuccess(result)},1);return{cancel:function(){}}}}};
+window.fetch=function(){return Promise.resolve({ok:true,json:function(){return Promise.resolve({})}})};
+window.XMLHttpRequest=function(){this.open=function(method,url){this.url=url};this.send=function(){var self=this;setTimeout(function(){self.status=200;self.responseText=JSON.stringify(self.url.indexOf('air-quality')>=0?{current:{us_aqi:36}}:{current:{temperature_2m:22}});if(self.onload)self.onload()},1)}};
+</script>
+  <script src="../app.js"></script>
+<script>
+(async function(){var out=$('#test-results'),passed=0,failed=0,lines=[];function check(name,result){if(result){passed++;lines.push('PASS '+name)}else{failed++;lines.push('FAIL '+name)}}function wait(ms){return new Promise(function(resolve){setTimeout(resolve,ms)})}function key(code){var e=new KeyboardEvent('keydown',{bubbles:true,cancelable:true});Object.defineProperty(e,'keyCode',{value:code});document.dispatchEvent(e)}await wait(15);
+check('F1 schedule and standings render',document.querySelectorAll('#calendar-list .calendar-row').length>0&&$('#driver-standing-list-a').children.length>0&&$('#constructor-standings').children.length>0);
+check('Home has no app drawer',!$('.home-screen #all-apps-grid')&&!$('.home-screen #home-grid'));
+check('App page counter is absent',!$('#apps-page-label')&&!$('#page-dots'));
+check('TV app catalog renders and excludes stubs',apps.length===19&&$('#all-apps-grid').children.length===12);
+doAction($('[data-view="apps"]'));doAction($('[data-action="apps-next"]'));check('Apps paging advances without a page label',appPage===1&&$('#all-apps-grid').children.length===7);doAction($('[data-action="apps-prev"]'));check('Apps paging returns to first page',appPage===0&&$('#all-apps-grid').children.length===12);
+openSearch();$('#search-query').value='youtube';renderSearch();check('App search filters results',$$('#search-results [data-id]').length===1);key(461);check('Back clears search text',$('#overlay').hidden===false&&$('#search-query').value==='');key(461);check('Back closes search and keeps the launcher open',$('#overlay').hidden&&!!$('#dashboard'));
+doAction($('[data-view="settings"]'));check('Settings opens on a category menu',$$('.settings-category').length===5&&document.activeElement.classList.contains('settings-category'));
+doAction($('.settings-category[data-value="apps"]'));check('Apps submenu exposes grid presets and shortcuts',$('#settings-detail').textContent.indexOf('3 × 3')>=0&&$('#settings-detail').textContent.indexOf('Search apps')>=0);
+doAction($('.setting-choice[data-group="grid"][data-value="3x3"]'));check('Grid choice persists and keeps focus',Number(localStorage.getItem('appGridSize'))===9&&document.activeElement.getAttribute('data-value')==='3x3');
+doAction($('.settings-category[data-value="appearance"]'));doAction($('.setting-choice[data-group="accent"][data-value="blue"]'));check('Accent choice updates theme and remains selected',document.documentElement.style.getPropertyValue('--accent')==='#4b91f1'&&document.activeElement.getAttribute('data-value')==='blue');doAction($('.setting-choice[data-group="font"][data-value="large"]'));check('F1 text size preference applies',document.body.classList.contains('font-large'));doAction($('.setting-choice[data-group="focus"][data-value="bold"]'));check('High contrast focus preference applies',document.body.classList.contains('focus-bold'));
+doAction($('.settings-category[data-value="data"]'));doAction($('.setting-choice[data-group="unit"][data-value="F"]'));check('Temperature unit converts cached Greater Noida reading',$('#weather-temp').textContent==='72°F');doAction($('.setting-choice[data-group="clock"][data-value="24"]'));check('24-hour clock hides AM/PM',localStorage.getItem('clockFormat')==='"24"'&&$('#ampm').hidden);
+doAction($('.settings-category[data-value="tv"]'));check('TV submenu exposes existing input and control actions',$('#settings-detail').textContent.indexOf('Open input sources')>=0&&$('#settings-detail').textContent.indexOf('Sound controls')>=0);
+doAction($('[data-view="inputs"]'));await wait(10);check('Inputs render friendly live source names',inputs.length===1&&$('#input-cards').textContent.indexOf('HDMI 1')>=0&&$('#input-cards').textContent.indexOf('com.webos.app')<0);switchInput('HDMI_1','com.webos.app.hdmi1');await wait(5);check('Input selection calls the webOS TV service',__calls.some(function(c){return c.method==='switchInput'&&c.params.inputId==='HDMI_1'}));
+doAction($('[data-view="home"]'));var home=$('.nav-tab[data-view="home"]');home.focus();moveFocus(39);check('D-pad focus moves along the bottom navigation',document.activeElement.getAttribute('data-view')==='apps');
+out.textContent=lines.join('\n')+'\n\n'+passed+' passed · '+failed+' failed';document.title='UI checks '+passed+'/'+(passed+failed)+(failed?' failed':'')})().catch(function(error){$('#test-results').textContent='HARNESS ERROR '+(error.stack||error);document.title='UI harness error'});
+</script>
+</body>
+</html>

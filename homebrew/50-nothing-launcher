@@ -1,0 +1,4 @@
+#!/bin/sh
+# Copy to /var/lib/webosbrew/init.d/ and chmod +x. Opens the launcher after boot.
+sleep 20
+luna-send -n 1 luna://com.webos.applicationManager/launch '{"id":"com.littlelauncher.app"}'

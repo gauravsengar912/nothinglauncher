@@ -1,0 +1,18 @@
+{
+  "id": "com.littlelauncher.app",
+  "version": "4.10.0",
+  "vendor": "NothingLauncher",
+  "type": "web",
+  "main": "index.html",
+  "title": "Nothing Launcher",
+  "icon": "icon.png",
+  "largeIcon": "icon.png",
+  "uiRevision": 3,
+  "splashBackground": "splash.png",
+  "transparent": false,
+  "handlesRelaunch": true,
+  "disableBackHistoryAPI": true,
+  "supportQuickStart": true,
+  "requiredPermissions": ["application.launcher", "application.query", "network.query", "audio.operation"],
+  "requiredACG": ["application.launcher", "application.query", "network.query", "audio.operation"]
+}
